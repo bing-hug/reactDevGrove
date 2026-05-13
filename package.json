@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^6.2.3",
     "antd": "^6.3.7",
     "axios": "^1.13.6",
     "classnames": "^2.5.1",
+    "dayjs": "^1.11.20",
     "immer": "^11.1.8",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
