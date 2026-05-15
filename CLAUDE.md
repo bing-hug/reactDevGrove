@@ -35,6 +35,7 @@ Skills 位于 `.claude/skills/` 目录，每个 skill 有独立的 `SKILL.md` �
 - **workflow-runner**: 在 Claude Code / OpenClaw / Cursor 中直接运行 agency-orchestrator YAML 工作流——无需 API key，使用当前会话的 LLM 作为执行引擎。当用户提供 .yaml 工作流文件或要求多角色协作完成任务时触发。
 - **writing-plans**: 当你有规格说明或需求用于多步骤任务时使用，在动手写代码之前
 - **writing-skills**: 当创建新技能、编辑现有技能或在部署前验证技能是否有效时使用
+- **ui-ux-pro-max**: 当需要设计UI、风格时或者需要优化样式时使用
 
 ## 如何使用
 

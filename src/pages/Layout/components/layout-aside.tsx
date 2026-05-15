@@ -22,22 +22,17 @@ const LayoutAside = () =>{
     const [ selectedKey ] = useImmer<string[]>(['home'])
 
     return (
-        <>
-            <div className="aside-container h-full">
-                <div className="logo px-16 py-12 leading-22 text-left border-b-solid border-b-[#0505050f] border-b-1">
-                    <img src={LogoPng} alt="logo" className="w-32 h-32" />
-                    <span className="logo-text">测试篇</span>
-                </div>
-                <div>
-                    <Menu
-                        openKeys={ openKey }
-                        selectedKeys={ selectedKey }
-                        items={ menus }
-                    >
-                    </Menu>
-                </div>
+        <div className="h-full border-r border-solid border-gray-200/50 bg-white">
+            <div className="flex items-center gap-10 px-16 py-14 border-b border-solid border-gray-200/50">
+                <img src={LogoPng} alt="logo" className="w-32 h-32" />
+                <span className="font-16 font-semibold text-gray-800">测试篇</span>
             </div>
-        </>
+            <Menu
+                openKeys={ openKey }
+                selectedKeys={ selectedKey }
+                items={ menus }
+            />
+        </div>
     )
 }
 

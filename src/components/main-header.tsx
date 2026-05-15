@@ -1,7 +1,6 @@
 import { Button } from 'antd'
 
-const MainHeader = ({ icon = '', title = '开心每一天', buttonText = '添加任务' }) => {
-    const handleClick = () => console.log('click')
+const MainHeader = ({ icon = '', title = '开心每一天', buttonText = '添加任务', btnClick = () => {}}) => {
     return (
         <>
             <header className="home-header flex justify-between items-center bg-white p-16 rounded-10">
@@ -9,7 +8,7 @@ const MainHeader = ({ icon = '', title = '开心每一天', buttonText = '添加
                     <img src={ icon } alt="icon" className="h-48" />
                     <div className="font-24 font-bold theme-color">{ title }</div>
                 </div>
-                <Button type="primary" onClick={ handleClick }>{ buttonText }</Button>
+                <Button type="primary" onClick={ btnClick }>{ buttonText }</Button>
             </header>
         </>
     )

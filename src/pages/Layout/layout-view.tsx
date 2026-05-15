@@ -8,9 +8,7 @@ const Layout = () => {
         <>
             <AntLayout className="h-full">
                 <Sider>
-                    <div className="pr-8 border-r-1 border-r-solid border-r-[#0505050f] bg-transparent">
-                        <LayoutAside/>
-                    </div>
+                    <LayoutAside/>
                 </Sider>
 
                 <Content className="px-40 pt-32">

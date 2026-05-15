@@ -1,4 +1,5 @@
 import Http from '@/request'
+import type { PlanItemInfo } from "@/types";
 
 /**
  * 获取所有任务
@@ -22,7 +23,7 @@ export async function getAllPlansApi() {
  * @param start_date 开始日期
  */
 export async function queryPlansByDateApi(start_date: string) {
-  return Http.get<string[]>('/plans/byStartDate', {
+  return Http.get<PlanItemInfo[]>('/plans/byStartDate', {
     params: { start_date }
   })
 }
