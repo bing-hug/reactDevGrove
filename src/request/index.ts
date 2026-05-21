@@ -11,7 +11,7 @@ import type {
 
 type Result<T> = {
   success: boolean
-  errorMsg: string
+  error_msg: string
   data: T
 }
 

@@ -1,25 +1,27 @@
+import { useNavigate, useLocation } from 'react-router'
 import { Menu } from 'antd'
-import { useImmer } from 'use-immer'
 import LogoPng from '@/assets/logo.png'
+import { routes } from '@/router'
+import { Icon } from '@iconify/react'
 
-const menus = [
-    {
-        label: 'Home',
-        key: 'home',
-        icon: 'icon',
-        title: 'title'
-    },
-    {
-        label: 'Plan',
-        key: 'plan',
-        icon: 'icon',
-        title: 'title'
-    }
-]
+const LayoutAside = () => {
+    const navigate = useNavigate()
+    const location = useLocation()
 
-const LayoutAside = () =>{
-    const [ openKey ] = useImmer<string[]>(['home'])
-    const [ selectedKey ] = useImmer<string[]>(['home'])
+    const menuItems = routes[0].children.map((route) => ({
+        key: route.handle?.key,
+        label: route.handle?.title,
+        icon: <Icon icon={route.handle?.icon} />,
+        path: route.index ? '/' : route.path,
+    }))
+
+    const selectedKey = (() => {
+        const route = routes[0].children.find((r) => {
+            if (r.index) return location.pathname === '/'
+            return r.path && location.pathname.includes(r.path)
+        })
+        return route?.handle?.key || 'home'
+    })()
 
     return (
         <div className="h-full border-r border-solid border-gray-200/50 bg-white">
@@ -28,9 +30,12 @@ const LayoutAside = () =>{
                 <span className="font-16 font-semibold text-gray-800">测试篇</span>
             </div>
             <Menu
-                openKeys={ openKey }
-                selectedKeys={ selectedKey }
-                items={ menus }
+                selectedKeys={[selectedKey]}
+                items={menuItems}
+                onClick={({ key }) => {
+                    const item = menuItems.find((m) => m.key === key)
+                    if (item?.path) navigate(item.path)
+                }}
             />
         </div>
     )
