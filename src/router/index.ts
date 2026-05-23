@@ -28,6 +28,11 @@ export const routes = [
                         return { success: false, error_msg: error }
                     }
                 }
+            },
+            {
+                path: 'stock-action',
+                handle: { title: '操作', key: 'stock', icon: 'mdi:journal-outline' },
+                Component: LifeView,
             }
         ]
     }

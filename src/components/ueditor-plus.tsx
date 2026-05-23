@@ -1,4 +1,4 @@
-import RcUeditor from 'react-ueditor-wrap';
+import RcUeditor from '@/utils/react-ueditor-wrap'
 import { type FC } from 'react'
 
 interface Props {

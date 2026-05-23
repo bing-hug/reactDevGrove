@@ -1,9 +1,9 @@
-import { Drawer, Form, type FormProps, Upload, type UploadFile, message, type UploadProps, Input, Select,DatePicker } from 'antd'
+import { Drawer, Form, type FormProps, Upload, type UploadFile, message, type UploadProps, Input, Select,DatePicker, Button } from 'antd'
 import type { FC } from 'react'
-import { useState } from 'react'
 import { spliceImgUrl } from '@/utils/spliceImgUrl.ts'
 import { getMoodOptions } from '@/enums/index.ts'
 import UeditorPlus from '@/components/ueditor-plus.tsx'
+import {createLifeRecordApi} from "@/apis/lifeRecord.ts";
 
 interface Props {
     visible: boolean,
@@ -28,12 +28,19 @@ const CreateRecord:FC<Props> = ({ visible, onSetVisible }) => {
     const [ form ] = Form.useForm<FormState>()
     const cover = Form.useWatch('cover', form);
 
-    const onFinish:FormProps<FormState>['onFinish'] = (values) => {
-        console.log(values)
+    const onFinish:FormProps<FormState>['onFinish'] = async (values) => {
+        try {
+            const res = await createLifeRecordApi(values)
+            console.log(res)
+            message.success('添加成功')
+        } catch (error) {
+            console.log(error)
+            message.error('添加失败')
+        }
     }
 
     const onFinishFailed:FormProps<FormState>['onFinishFailed'] = (errorInfo) => {
-        console.log('测试')
+        console.log(errorInfo)
     }
 
     const coverBeforeUpload = (file: File) => {
@@ -52,17 +59,20 @@ const CreateRecord:FC<Props> = ({ visible, onSetVisible }) => {
         if (info.file.status === 'done') {
             // 上传完成，拿返回值存到 form 里
             form.setFieldValue('cover', info.file.response?.data)
+            message.success(`${info.file.name} 上传成功`)
+        } else if(info.file.status === 'error') {
+            message.error(`${ info.file.name } 上传失败`)
         }
     }
 
-
     return (
         <>
-            <Drawer open={visible} className="w-600" onClose={ () => onSetVisible(false)}>
+            <Drawer open={visible} size={"large"}  className="w-800" onClose={ () => onSetVisible(false)}>
                 <div>
                     <Form
                         form={ form }
                         autoComplete="off"
+                        labelCol={{ span: 4}}
                         onFinish={ onFinish }
                         onFinishFailed={ onFinishFailed }
                     >
@@ -126,6 +136,12 @@ const CreateRecord:FC<Props> = ({ visible, onSetVisible }) => {
                             name="content"
                         >
                             <UeditorPlus />
+                        </Form.Item>
+
+                        <Form.Item label={null} labelAlign="right">
+                            <Button type="primary" htmlType="submit">
+                                提交
+                            </Button>
                         </Form.Item>
                     </Form>
                 </div>
